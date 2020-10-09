@@ -192,15 +192,8 @@ export default class Play extends Component {
         if (this.state.nextQuestion === undefined) {
           this.setState(
             {
-              currentQuestionIndex: 0,
-            },
-            () =>
-              this.displayQuestions(
-                this.state.randomQuestions,
-                this.state.currentQuestion,
-                this.state.previousQuestion,
-                this.state.nextQuestion
-              )
+              currentQuestionIndex: this.state.randomQuestions.length - 1,
+            }
           );
         } else {
           this.displayQuestions(
@@ -225,15 +218,8 @@ export default class Play extends Component {
         if (this.state.nextQuestion === undefined) {
           this.setState(
             {
-              currentQuestionIndex: 0,
-            },
-            () =>
-              this.displayQuestions(
-                this.state.randomQuestions,
-                this.state.currentQuestion,
-                this.state.previousQuestion,
-                this.state.nextQuestion
-              )
+              currentQuestionIndex: this.state.randomQuestions.length - 1,
+            }
           );
         } else {
           this.displayQuestions(

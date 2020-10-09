@@ -1,0 +1,36 @@
+[
+    {
+        "question" : "The Temple of Heaven, a religious building, is situated in",
+        "optionA" : "Edinburgh",
+        "optionB" : "Rome",
+        "optionC" : "Beijing",
+        "optionD" : "Tokyo",
+        "answer" : "Beijing"
+    },
+    
+    {
+        "question" : "We live on the planet Earth. According to the scientists, the Earth was formed about _____ years ago",
+        "optionA" : "4.6 million",
+        "optionB" : "5.6 million",
+        "optionC" : "4.6 billion",
+        "optionD" : "5.6 billion",
+        "answer" : "4.6 billion"
+    },
+ 
+    {
+        "question" : "Which country is building “Mars Science City” to develop technology to colonize Mars?",
+        "optionA" : "China",
+        "optionB" : "Qatar",
+        "optionC" : "UAE",
+        "optionD" : "United States",
+        "answer" : "UAE"
+    },
+    {
+        "question" : "The stock of “Amonium Nitrate” which was resulted in large explosion in Lebanon is a _____ chemical compound.",
+        "optionA" : "solid",
+        "optionB" : "liquid",
+        "optionC" : "gaseous",
+        "optionD" : "plasma",
+        "answer" : "solid"
+    }
+]

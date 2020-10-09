@@ -25,7 +25,7 @@ export default class ResultSummary extends Component {
             {correctAns.map((item) => (
               <>
                 <p style={{ fontWeight: "bolder", marginBottom: "8px" }}>
-                {Questions.indexOf(item) + 1}. {item.question} -
+                Q{Questions.indexOf(item) + 1}. {item.question} -
                   <span style={{ fontWeight: "bolder", color: "green" }}>
                     {item.answer}
                   </span>{console.log(Questions)}
@@ -37,7 +37,7 @@ export default class ResultSummary extends Component {
             {wrongAns.map((item) => (
               <>
                 <p style={{ fontWeight: "bolder", marginBottom: "8px" }}>
-                {Questions.indexOf(item) + 1}. {item.question} -
+                Q{Questions.indexOf(item) + 1}. {item.question} -
                   <span style={{ fontWeight: "bolder", color: "green" }}>
                     {item.answer}
                   </span>

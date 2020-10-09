@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Questions from "../../Questions.json";
 import Putme from "../../Putme.json";
+import English from "../../English.json";
+import Mathematics from "../../Mathematics.json";
 import isEmpty from "../../Utils/isEmpty";
 import mouseClick from "../../Asset/mouseClick.mp3";
 import winSound from "../../Asset/winSound.mp3";
@@ -72,7 +74,7 @@ export default class Play extends Component {
       },
       () => {
         this.chooseRandQuestion(this.checkOpt().subject);
-        console.log(this.checkOpt().subject);
+        
          this.startTimer(180000);
         this.setState({
           currentQuestionIndex : 0
@@ -89,28 +91,28 @@ export default class Play extends Component {
 
   checkOpt = () => {
     if (this.state.selectOpt === "English") {
-      console.log(Putme);
+      
       return( {
-        subject : Putme,
+        subject : English,
         duration : 120000
       })
     } else if (this.state.selectOpt === "General Knowledge") {
-      console.log(Questions);
+      
       return( {
         subject : Questions,
         duration : 180000
       })
     } else {
-      console.log(Putme);
+     
       return( {
-        subject : Putme,
+        subject : Mathematics,
         duration : 240000
       })
     }
+    
   };
 
   chooseRandQuestion = (data) => {
-    console.log(data);
     let arrayContainer = [];
     const genNum = Math.floor(Math.random() * 15);
     arrayContainer.push(genNum);
@@ -120,9 +122,9 @@ export default class Play extends Component {
       };
     });
     for (let counter = 0; counter < 14; counter++) {
-      let newGen = Math.floor(Math.random() * 15 );
+      let newGen = Math.floor(Math.random() * data.length );
       while (arrayContainer.lastIndexOf(newGen) !== -1) {
-        newGen = Math.floor(Math.random() * 15 );
+        newGen = Math.floor(Math.random() * data.length );
       }
       arrayContainer.push(newGen);
       this.setState((prevState) => {
@@ -489,7 +491,7 @@ export default class Play extends Component {
             <option>-- Subject--</option>
             <option value="General Knowledge"> General Knowledge</option>
             <option value="English">English</option>
-            <option value="English">Mathematics</option>
+            <option value="Mathematics">Mathematics</option>
           </select>
 
           <Grid container spacing={3}>

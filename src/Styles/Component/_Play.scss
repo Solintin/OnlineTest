@@ -1,0 +1,115 @@
+.questions {
+  background-color: whitesmoke;
+  border-left: 5px solId lightgreen;
+  width: 80%;
+  margin: $lg auto 0 auto;
+  padding: 5px $md;
+  select{
+    display: block;
+    text-align: center;
+  }
+
+  .lifeline-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .lifeline {
+    position: relative;
+    top: -3px;
+  }
+  .lifeline-icon{
+    color: $lightGreen;
+    cursor: pointer;
+    &:hover{
+      background-color: none;
+      color: darken($color: brown, $amount: 60%)
+    }
+  }
+
+  h5 {
+    font-size: 1.2rem;
+    margin-bottom: $lg;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .option-container {
+    display: inline-block;
+    width: 50%;
+  }
+  .options {
+    background-color: rgb(107, 32, 178);
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    margin: $md 10px;
+    padding: $normal;
+    text-align: center;
+    transition: 0.3s;
+    width: 90%;
+    &:hover {
+      background-color: darken($color: rgb(62, 62, 167), $amount: 20%);
+    }
+  }
+}
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 auto $sm auto;
+  pad: $md;
+  width: 80%;
+
+  button {
+    border: none;
+    color: whitesmoke;
+    cursor: pointer;
+    font-family: $quicksand;
+    margin-right: $sm;
+    padding: $xs $sm;
+    border-radius: 4px;
+  }
+  button{
+
+    margin: 5px;
+    .doubleleft-icon{
+      width: 15px;
+      position: relative;
+      top: 3px;
+  }
+  }
+  button:first-child {
+    background-color: rgb(62, 62, 168);
+    box-shadow: $shadow;
+    transition: 0.3s linear all;
+  }
+  button:first-child:hover {
+    background-color: darken($color: rgb(62, 62, 168), $amount: 10%);
+  }
+  button:nth-child(2) {
+    background-color: $lightGreen;
+    box-shadow: $shadow;
+    transition: 0.3s linear all;
+  }
+  button:nth-child(2):hover {
+    background-color: darken($color: $lightGreen, $amount: 10%);
+  }
+  button:nth-child(3) {
+    background-color: rgb(223, 81, 81);
+    box-shadow: $shadow;
+    transition: 0.3s linear all;
+  }
+  button:nth-child(3):hover {
+    background-color: darken($color: rgb(223, 81, 81), $amount: 10%);
+  }
+  button:nth-child(4) {
+    background-color:darkgreen;
+    box-shadow: $shadow;
+    transition: 0.3s linear all;
+  }
+  button:nth-child(4):hover {
+    background-color: darken($color:darkgreen, $amount: 10%);
+  }
+  h2 {
+    text-align: center;
+    font-weight: lighter;
+  }
+}

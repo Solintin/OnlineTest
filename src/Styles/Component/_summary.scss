@@ -1,0 +1,90 @@
+.upper-layer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: darkgreen;
+  text-align: center;
+  .success-icon {
+    width: 7rem;
+    color: darkgreen;   width: 7rem;
+    color: darkgreen;
+    margin-bottom: -30px;
+  }
+  
+}
+.container-summary {
+  background-color: darkgrey;
+  opacity: 0.8;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 10px;
+  position: relative;
+  .total-icon{
+    width: 2rem;
+    color: khaki;
+    position: absolute;
+    z-index: 1;
+    margin-bottom: 2px;
+    bottom: 10;
+  }
+  .attempt-icon{
+    width: 2rem;
+    color: purple;
+    position: absolute;
+    z-index: 1;
+    margin-bottom: 2px;
+    bottom: 10;
+  }
+  .correct-icon{
+    width: 2rem;
+    color: darkgreen;
+    position: absolute;
+    z-index: 1;
+    margin-bottom: 2px;
+    bottom: 10;
+  }
+  .wrong-icon{
+    width: 2rem;
+    color: red;
+    position: absolute;
+    z-index: 1;
+    margin-bottom: 2px;
+    bottom: 10;
+  }
+  .stat{
+      margin-left: 30px;
+  }
+  
+}
+.linkContainer {
+  margin: 40px 50px;
+  display: flex;
+  justify-content: space-between;
+ 
+  .link{
+    border: 1px solid greenyellow;
+    padding: 10px;
+    background-color: rgb(5, 2, 2);
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bolder;
+    transition: 0.5s linear all;
+    &:hover{
+        background-color: darken(darkgrey, 40%);
+    }
+    .left-icon{
+        width: 19px;
+        position: relative;
+        top: 3px;
+    }
+    .replay-icon{
+        width: 19px;
+        position: relative;
+        top: 3px;
+    }
+  }
+}

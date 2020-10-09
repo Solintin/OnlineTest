@@ -1,0 +1,106 @@
+#home {
+  // background-image: url("../../Asset/img3.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: space-around;
+  height: 100vh;
+  width: 100vw;
+  
+
+  section {
+    background-color: rgba($color: #000000, $alpha: 0.7);
+    height: 80%;
+    width: 40%;
+    padding-left: $md;
+    padding-right: $md;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+  }
+  .cube {
+    width: 8rem;
+    color: $green;
+  }
+  h1 {
+    text-align: center;
+    color: $off-white;
+    font-size: $lg;
+    font-weight: 600;
+  }
+  .play-button-container {
+    width: 100%;
+  }
+  a.play-button {
+    background-color: $lightGreen;
+    color: #fff;
+    cursor: pointer;
+    padding: $normal;
+    display: block;
+    width: 100%;
+    border-radius: 30px;
+    text-align: center;
+    transition: 0.5s linear all;
+  }
+  a.play-button:hover {
+    background-color: darken($lightGreen, 10);
+    box-shadow: 3px 4px 3px rgba($color: #000000, $alpha: 0.7);
+  }
+  .auth-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: $lg;
+
+    .auth-buttons {
+      color: white;
+      cursor: pointer;
+      border-radius: 30px;
+      padding: $normal 0;
+      text-align: center;
+      width: 45%;
+      transition: 0.5s linear all;
+    }
+    #login-button {
+      background-color: crimson;
+      &:hover {
+        box-shadow: $shadow;
+        background-color: darken(crimson, 10);
+      }
+    }
+
+    #signup-button {
+      background-color: steelblue;
+      &:hover {
+        box-shadow: $shadow;
+        background-color: darken(steelblue, 10);
+      }
+    }
+  }
+}
+.header-web{
+  background-color: rgba($color: #000000, $alpha: 0.1);
+
+  width: 100vw;
+  height: auto;
+  padding: 15px 25px;
+  color: black !important;
+  font-weight: 900;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  a{
+    margin-left: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  #home section {
+    padding: 0 $normal;
+    height: 100%;
+    width: 100%;
+  }
+}

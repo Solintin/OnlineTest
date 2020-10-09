@@ -1,0 +1,23 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+     font-family: 'Quicksand', sans-serif;;
+}
+.toast-invalid {
+    background-color: $error-text !important;
+    border-radius: 5px !important;
+    color: whitesmoke !important;
+}
+.toast-valid {
+    background-color: $success-text !important;
+    border-radius: 5px !important;
+    color: whitesmoke !important;
+}
+.disable{
+    pointer-events: none;
+    background-color: #ccc !important ;
+    box-shadow: none !important ;
+    opacity: .7 !important ;
+}

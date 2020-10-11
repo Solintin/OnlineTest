@@ -445,7 +445,7 @@ export default class Play extends Component {
       this.setState({
         nextBtnDis: false,
       });
-    }
+    } 
   };
 
   endGame = () => {
@@ -460,6 +460,7 @@ export default class Play extends Component {
       hints,
       clickedRightAnswers,
       randomQuestions,
+      time
     } = this.state;
     const playerStats = {
       Score: score,
@@ -471,6 +472,10 @@ export default class Play extends Component {
       hintsUsed: 5 - hints,
       clickedRightAnswers,
       randomQuestions,
+      timeUsed : {
+          min : 2- time.minutes,
+          sec : 59 - time.seconds
+      }
     };
 
     setTimeout(() => {
@@ -642,7 +647,7 @@ export default class Play extends Component {
       { this.state.randomQuestions.length > 0 ?  
           <div className="question-index">
           {this.state.randomQuestions.map((items, idx) => (
-            <div
+            <div key={idx}
               onClick={() => this.indexClick(idx)}
               className="indexes"
               style={{

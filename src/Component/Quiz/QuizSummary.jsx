@@ -8,6 +8,7 @@ import { mdiReplay } from "@mdi/js";
 import { mdiCloseThick } from "@mdi/js";
 import { mdiChartBar } from "@mdi/js";
 import { mdiChartLine } from "@mdi/js";
+import { mdiClockTimeThreeOutline } from '@mdi/js';
 import Icon from "@mdi/react";
 
 export default class QuizSummary extends Component {
@@ -21,6 +22,7 @@ export default class QuizSummary extends Component {
       wrongAnswers: 0,
       filteredRightAnswers: [],
       filteredWrongAnswers: [],
+      timeUsed : {}
     };
   }
   componentDidMount() {
@@ -28,6 +30,7 @@ export default class QuizSummary extends Component {
     if (state) {
       this.setState(
         {
+          timeUsed : state.timeUsed,
           filteredRightAnswers: state.clickedRightAnswers.filter(
             (v, i, a) => a.findIndex((t) => t.question === v.question) === i
           ),
@@ -60,7 +63,7 @@ export default class QuizSummary extends Component {
           )
       );
     }
-    console.log(this.state.filteredRightAnswers.length);
+  
   }
   render() {
     const { state } = this.props.location;
@@ -123,13 +126,19 @@ export default class QuizSummary extends Component {
             </span>
             <span className="right"> {this.state.correctAnswers} </span>
             <br />
-            {console.log(this.props)}
+            
 
             <span className="left">
               <Icon path={mdiCloseThick} className="wrong-icon" />
               <span className="stat">Number of Wrong Answers:</span>
             </span>
             <span className="right"> {this.state.wrongAnswers} </span>
+            <br />
+            <span className="left">
+              <Icon path={mdiClockTimeThreeOutline} className="time-icon" />
+              <span className="stat">Total Time Used:</span>
+            </span>
+            <span className="right"> {this.state.timeUsed.min} : {this.state.timeUsed.sec}s  </span>
             <br />
           </div>
           <div className=" linkContainer">

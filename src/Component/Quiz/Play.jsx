@@ -485,10 +485,22 @@ export default class Play extends Component {
 
     if (checkStatus) {
       return "green";
-    } else {
+     }
+  
+  }; 
+  setIndexNotAnswered = (items) =>{
+    const checkStatus = this.state.selectedQuestion.includes(items);
+
+    if (!checkStatus) {
       return "red";
+     }
+  }
+
+  setIndexCurrent = (idx) => {
+    if (this.state.currentQuestionIndex === idx ) {
+      return "blue"
     }
-  };
+  }
 
   indexClick = (idx) => {
     this.setState(
@@ -627,20 +639,24 @@ export default class Play extends Component {
             </Grid>
           </Grid>
         </div>
-        <div className="question-index">
+      { this.state.randomQuestions.length > 0 ?  
+          <div className="question-index">
           {this.state.randomQuestions.map((items, idx) => (
             <div
               onClick={() => this.indexClick(idx)}
               className="indexes"
               style={{
                 cursor: "pointer",
-                backgroundColor: this.setIndex(idx + 1, items),
+                color : 'white',
+                backgroundColor: this.setIndex(idx + 1, items) || this.setIndexCurrent(idx) || this.setIndexNotAnswered(items) ,
               }}
             >
               {idx + 1}
             </div>
           ))}
         </div>
+        : null
+       }
       </>
     );
   }

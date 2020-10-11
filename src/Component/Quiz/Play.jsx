@@ -9,18 +9,16 @@ import mouseClick from "../../Asset/mouseClick.mp3";
 import winSound from "../../Asset/winSound.mp3";
 import wrongSound from "../../Asset/wrongSound.mp3";
 import classnames from "classnames";
-import { Grid } from "@material-ui/core"
+import { Grid } from "@material-ui/core";
 import { mdiChevronDoubleLeft } from "@mdi/js";
 import { mdiChevronDoubleRight } from "@mdi/js";
 import Icon from "@mdi/react";
-
-
 
 export default class Play extends Component {
   constructor(prop) {
     super();
     this.state = {
-      selectOpt: "",
+      selectedQuestion: [],
       question: Questions,
       putme: Putme,
       filteredAnswers: [],
@@ -60,7 +58,6 @@ export default class Play extends Component {
       previousQuestion,
       nextQuestion
     );
-   
   }
   componentWillUnmount() {
     clearInterval(this.interval);
@@ -74,42 +71,41 @@ export default class Play extends Component {
       },
       () => {
         this.chooseRandQuestion(this.checkOpt().subject);
-        
-         this.startTimer(180000);
-        this.setState({
-          currentQuestionIndex : 0
-        }, () => this.displayQuestions(
-          this.state.randomQuestions,
-          this.state.currentQuestion,
-          this.state.previousQuestion,
-          this.state.nextQuestion
-        ))
-       
+
+        this.startTimer(180000);
+        this.setState(
+          {
+            currentQuestionIndex: 0,
+          },
+          () =>
+            this.displayQuestions(
+              this.state.randomQuestions,
+              this.state.currentQuestion,
+              this.state.previousQuestion,
+              this.state.nextQuestion
+            )
+        );
       }
     );
   };
 
   checkOpt = () => {
     if (this.state.selectOpt === "English") {
-      
-      return( {
-        subject : English,
-        duration : 120000
-      })
+      return {
+        subject: English,
+        duration: 120000,
+      };
     } else if (this.state.selectOpt === "General Knowledge") {
-      
-      return( {
-        subject : Questions,
-        duration : 180000
-      })
+      return {
+        subject: Questions,
+        duration: 180000,
+      };
     } else {
-     
-      return( {
-        subject : Mathematics,
-        duration : 240000
-      })
+      return {
+        subject: Mathematics,
+        duration: 240000,
+      };
     }
-    
   };
 
   chooseRandQuestion = (data) => {
@@ -122,9 +118,9 @@ export default class Play extends Component {
       };
     });
     for (let counter = 0; counter < 14; counter++) {
-      let newGen = Math.floor(Math.random() * data.length );
+      let newGen = Math.floor(Math.random() * data.length);
       while (arrayContainer.lastIndexOf(newGen) !== -1) {
-        newGen = Math.floor(Math.random() * data.length );
+        newGen = Math.floor(Math.random() * data.length);
       }
       arrayContainer.push(newGen);
       this.setState((prevState) => {
@@ -166,18 +162,35 @@ export default class Play extends Component {
   };
 
   handleOptionClick = (e) => {
-    const {answer } = this.state;
+    const {
+      answer,
+      selectedQuestion,
+      clickedRightAnswers,
+      currentQuestion,
+    } = this.state;
+
     if (e.target.innerHTML.toLowerCase() === answer.toLowerCase()) {
       this.correctAnswers();
 
       const clickedRA = this.state.randomQuestions.filter((item) =>
         item.answer.toLowerCase().includes(e.target.innerHTML.toLowerCase())
       );
-      this.setState({
-        clickedRightAnswers: [...this.state.clickedRightAnswers, clickedRA[0]],
-      });
+      if (!clickedRightAnswers.includes(currentQuestion)) {
+        this.setState({
+          clickedRightAnswers: [
+            ...this.state.clickedRightAnswers,
+            clickedRA[0],
+          ],
+        });
+      }
     } else {
       this.wrongAnswers();
+    }
+    const clickedOpt = currentQuestion;
+    if (!selectedQuestion.includes(clickedOpt)) {
+      this.setState({
+        selectedQuestion: [...selectedQuestion, clickedOpt],
+      });
     }
   };
   correctAnswers = () => {
@@ -190,11 +203,9 @@ export default class Play extends Component {
       }),
       () => {
         if (this.state.nextQuestion === undefined) {
-          this.setState(
-            {
-              currentQuestionIndex: this.state.randomQuestions.length - 1,
-            }
-          );
+          this.setState({
+            currentQuestionIndex: this.state.randomQuestions.length - 1,
+          });
         } else {
           this.displayQuestions(
             this.state.randomQuestions,
@@ -216,11 +227,9 @@ export default class Play extends Component {
       }),
       () => {
         if (this.state.nextQuestion === undefined) {
-          this.setState(
-            {
-              currentQuestionIndex: this.state.randomQuestions.length - 1,
-            }
-          );
+          this.setState({
+            currentQuestionIndex: this.state.randomQuestions.length - 1,
+          });
         } else {
           this.displayQuestions(
             this.state.randomQuestions,
@@ -271,8 +280,18 @@ export default class Play extends Component {
     }
   };
   handleQuit = () => {
-    if (window.confirm("Are You Sure yo want to quit")) {
+    if (window.confirm("Are you sure you want to quit")) {
       this.props.history.push("/");
+    }
+  };
+
+  handleSubmit = () => {
+    if (
+      window.confirm(`Are you sure you want to submit, You've answered 
+    ${this.state.selectedQuestion.length} out of
+     ${this.state.randomQuestions.length} Questions`)
+    ) {
+      this.endGame();
     }
   };
 
@@ -459,6 +478,33 @@ export default class Play extends Component {
     }, 1000);
   };
 
+  if() {}
+
+  setIndex = (idx, items) => {
+    const checkStatus = this.state.selectedQuestion.includes(items);
+
+    if (checkStatus) {
+      return "green";
+    } else {
+      return "red";
+    }
+  };
+
+  indexClick = (idx) => {
+    this.setState(
+      {
+        currentQuestionIndex: idx,
+      },
+      () =>
+        this.displayQuestions(
+          this.state.randomQuestions,
+          this.state.currentQuestion,
+          this.state.previousQuestion,
+          this.state.nextQuestion
+        )
+    );
+  };
+
   render() {
     const { currentQuestion, time } = this.state;
 
@@ -487,18 +533,21 @@ export default class Play extends Component {
                 {this.state.numberOfQuestion}
               </h4>
             </Grid>
-           
+
             <Grid item xs={6}>
-              <span style={{float : 'right'}}>
-              <h4 style={{ color : time.minutes < 1? "red" : ''}} >
-                {time.minutes} : {time.seconds}
-                <span className="mdi mdi-clock-outline mdi-36px lifeline-icon"></span>
-              </h4>
+              <span style={{ float: "right" }}>
+                <h4 style={{ color: time.minutes < 1 ? "red" : "" }}>
+                  {time.minutes} : {time.seconds}
+                  <span className="mdi mdi-clock-outline mdi-36px lifeline-icon"></span>
+                </h4>
               </span>
             </Grid>
           </Grid>
 
-        <center>  <h4>{currentQuestion.question}</h4></center>
+          <center>
+            {" "}
+            <h4>{currentQuestion.question}</h4>
+          </center>
 
           <Grid container justify="center">
             <Grid item container xs={10}>
@@ -507,88 +556,90 @@ export default class Play extends Component {
                   {currentQuestion.optionA}
                 </div>
                 <div onClick={this.handleOptionClick} className="options">
-                                  {currentQuestion.optionB}
-
+                  {currentQuestion.optionB}
                 </div>
               </Grid>
               <Grid item xs={12} md={6}>
                 <div onClick={this.handleOptionClick} className="options">
-                                  {currentQuestion.optionC}
-
+                  {currentQuestion.optionC}
                 </div>
                 <div onClick={this.handleOptionClick} className="options">
-                                  {currentQuestion.optionD}
-
+                  {currentQuestion.optionD}
                 </div>
               </Grid>
             </Grid>
           </Grid>
 
-
-
-
-
-          <Grid container  className="button-container" justify="center">
-            <Grid item  container xs={10}>
-              <Grid item xs={6}  md={3}>
-              <button
-              className={classnames("", { disable: this.state.prevBtnDis })}
-              onClick={() => {
-                this.handleButtonClick();
-                this.handlePrevClick();
-              }}
-            > <Icon path={mdiChevronDoubleLeft} className="doubleleft-icon" />
-              Previous
-            </button>
+          <Grid container className="button-container" justify="center">
+            <Grid item container xs={10}>
+              <Grid item xs={6} md={3}>
+                <button
+                  className={classnames("", { disable: this.state.prevBtnDis })}
+                  onClick={() => {
+                    this.handleButtonClick();
+                    this.handlePrevClick();
+                  }}
+                >
+                  {" "}
+                  <Icon
+                    path={mdiChevronDoubleLeft}
+                    className="doubleleft-icon"
+                  />
+                  Previous
+                </button>
               </Grid>
-              <Grid item xs={6}  md={3}>
-              <button
-              className={classnames("", { disable: this.state.nextBtnDis })}
-              onClick={() => {
-                this.handleButtonClick();
-                this.handleNextClick();
-              }}
-            >
-             Next
-             <Icon path={mdiChevronDoubleRight} className="doubleleft-icon" />
-            </button>
+              <Grid item xs={6} md={3}>
+                <button
+                  className={classnames("", { disable: this.state.nextBtnDis })}
+                  onClick={() => {
+                    this.handleButtonClick();
+                    this.handleNextClick();
+                  }}
+                >
+                  Next
+                  <Icon
+                    path={mdiChevronDoubleRight}
+                    className="doubleleft-icon"
+                  />
+                </button>
               </Grid>
-              <Grid item xs={6}  md={3}>
-                
-            <button
-            style={{backgroundColor : 'brown'}}
-              onClick={() => {
-                this.handleButtonClick();
-                this.handleQuit();
-              }}
-            >
-              Quit
-            </button>
+              <Grid item xs={6} md={3}>
+                <button
+                  style={{ backgroundColor: "brown" }}
+                  onClick={() => {
+                    this.handleButtonClick();
+                    this.handleQuit();
+                  }}
+                >
+                  Quit
+                </button>
               </Grid>
-              <Grid item xs={6}  md={3}>
-              <button
-               style={{backgroundColor : 'green'}}
-              onClick={() => {
-                this.endGame();
-              }}
-            >
-              Submit
-            </button>
+              <Grid item xs={6} md={3}>
+                <button
+                  style={{ backgroundColor: "green" }}
+                  onClick={() => {
+                    this.handleSubmit();
+                  }}
+                >
+                  Submit
+                </button>
               </Grid>
             </Grid>
           </Grid>
-
-          <div >
-
-
-
-
-
-
-           
-           
-            
-          </div>
+        </div>
+        <div className="question-index">
+          {this.state.randomQuestions.map((items, idx) => (
+            <div
+              onClick={() => this.indexClick(idx)}
+              className="indexes"
+              style={{
+                cursor: "pointer",
+                backgroundColor: this.setIndex(idx + 1, items),
+              }}
+            >
+              {idx + 1}
+            </div>
+          ))}
         </div>
       </>
     );

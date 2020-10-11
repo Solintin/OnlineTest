@@ -19,8 +19,6 @@ export default class QuizSummary extends Component {
       numberOfAnsweredQuestion: 0,
       correctAnswers: 0,
       wrongAnswers: 0,
-      usedFiftyFifty: 0,
-      usedHints: 0,
       filteredRightAnswers: [],
       filteredWrongAnswers: [],
     };
